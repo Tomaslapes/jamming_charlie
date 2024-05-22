@@ -1,39 +1,56 @@
 <script lang="ts">
-  import Greet from './lib/Greet.svelte'
+	import { Button } from "$lib/components/ui/button";
+	import * as Select from "$lib/components/ui/select/index.js";
+	import * as Card from "$lib/components/ui/card";
+	import { Badge } from "$lib/components/ui/badge/index.js";
+
+	const fruits = [
+		{ value: "apple", label: "Apple" },
+		{ value: "banana", label: "Banana" },
+		{ value: "blueberry", label: "Blueberry" },
+		{ value: "grapes", label: "Grapes" },
+		{ value: "pineapple", label: "Pineapple" },
+	];
 </script>
 
-<main class="container">
-  <h1>Welcome to Tauri!</h1>
+<div class="w-screen items-center flex flex-col p-10">
+	<div class="max-w-4xl w-full">
+		<h1 class="text-2xl font-bold">Robotic Ukulele Controller</h1>
 
-  <div class="row">
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo vite" alt="Vite Logo" />
-    </a>
-    <a href="https://tauri.app" target="_blank">
-      <img src="/tauri.svg" class="logo tauri" alt="Tauri Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank">
-      <img src="/svelte.svg" class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
+		<Card.Root class="my-5">
+			<Card.Header>
+				<Card.Title>
+					<div>
+						Status
+						<Badge variant="destructive">Offline</Badge>
+					</div>
+				</Card.Title>
+				<Card.Description>Card Description</Card.Description>
+			</Card.Header>
+			<Card.Content>
+				<p></p>
+			</Card.Content>
+			<Card.Footer>
+				<p>Card Footer</p>
+			</Card.Footer>
+		</Card.Root>
 
-  <p>
-    Click on the Tauri, Vite, and Svelte logos to learn more.
-  </p>
-
-  <div class="row">
-    <Greet />
-  </div>
-
-
-</main>
-
-<style>
-  .logo.vite:hover {
-    filter: drop-shadow(0 0 2em #747bff);
-  }
-
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00);
-  }
-</style>
+		<div class="w-full flex gap-2 my-3">
+			<Select.Root portal={null}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select a port" />
+				</Select.Trigger>
+				<Select.Content>
+					<Select.Group>
+						<Select.Label>Fruits</Select.Label>
+						{#each fruits as fruit}
+							<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
+						{/each}
+					</Select.Group>
+				</Select.Content>
+				<Select.Input name="favoriteFruit" />
+			</Select.Root>
+			<Button>Connect</Button>
+		</div>
+	</div>
+</div>
