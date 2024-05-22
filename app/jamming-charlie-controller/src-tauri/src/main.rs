@@ -40,6 +40,7 @@ fn connect(port_name: String) {
     let port = serialport::new(&port_name, 115_200).open().unwrap();
     println!("Connected!");
     println!("{}",&port_name);
+    
 }
 
 fn main() {
