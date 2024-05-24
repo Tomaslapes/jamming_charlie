@@ -12,6 +12,10 @@ export const badgeVariants = tv({
 			destructive:
 				"border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
 			outline: "text-foreground",
+			Connected:
+				"border-transparent bg-[#94d82d] text-lime-foreground shadow hover:bg-lime/80",
+				Disconnected:
+				"border-transparent bg-[#ff6b6b] text-lime-foreground shadow hover:bg-lime/80"
 		},
 	},
 	defaultVariants: {

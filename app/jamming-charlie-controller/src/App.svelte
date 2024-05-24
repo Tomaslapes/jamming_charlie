@@ -21,6 +21,7 @@
 
 	let ports = get_serial_ports();
 	let device_status = null;
+	$: console.log(device_status);
 
 	let selected_port = null;
 	$: connect_disabled = selected_port == null;
@@ -28,6 +29,7 @@
 
 	const intervalId = setInterval(async () => {
 		device_status = await invoke("get_device_state");
+		
 	}, 200); // Interval in milliseconds
 
 	$: console.log(ports);
@@ -36,9 +38,9 @@
 		clearInterval(intervalId);
 	});
 
-	// onMount(async () => {
-	// 	get_serial_ports();
-	// });
+	onMount(async () => {
+		get_serial_ports();
+	});
 
 	async function handleConnect() {
 		try {
@@ -62,7 +64,7 @@
 				<Card.Title>
 					<div>
 						Status
-						<Badge variant="destructive">Offline</Badge>
+						<Badge variant={device_status?.status ?? "Disconnected"}>{device_status?.status ?? "Disconnected"}</Badge>
 					</div>
 				</Card.Title>
 				<Card.Description>Card Description</Card.Description>
